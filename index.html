@@ -5,30 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Socko</title>
-    <script src="socket.io.js"></script>
-    <script src="jsoneditor.min.js"></script>
-    <link rel="stylesheet" href="jsoneditor.min.css">
-    <link rel="stylesheet" href="main.css">
+    <script src="js/socket.io.js"></script>
+    <script src="js/jsoneditor.min.js"></script>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/jsoneditor.min.css">
+    <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
-    <h1>Welcome to socko</h1>
-    <div id="apiurl" style="display: none"><%= apiurl %></div>
-
-    <div class="mainContainer">
+    <header class="header">
+      <div class="logo">Socko</div>
+      <div id="apiurl" style="display: none"><%= apiurl %></div>
+    </header>
+    <div class="sentContainer">
+        <div class="sentEventsContainer">
+          <ul class="sentEvents"></ul>
+        </div>
         <div class="sendEventContainer">
-            <form class="sendEvent">
+            <form class="sendEventForm">
                 <input type="text" class="eventName" id="eventName" value="test_event" />
+                <button type="submit" class="sendEventButton">Send</button>
                 <div id="jsoneditor"></div>
-                <button type="submit">Send</button>
+                
             </form>
         </div>
+    </div>
+    <div class="receivedContainer">
         <div class="receivedEventsContainer">
-            <div>Incoming events</div>
             <ul class="receivedEvents"></ul>
+        </div>
+        <div class="receivedView">
+            <div id="jsonViewContainer"></div>
         </div>
     </div>
 
 
   </body>
-  <script src="client.js"></script>
+  <script src="js/localDb.js"></script>
+  <script src="js/client.js"></script>
 </html>

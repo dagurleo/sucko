@@ -1,0 +1,124 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+
+
+.header {
+    height: 50px;
+    color: #fff;
+    background-color: #484D6D;
+    padding: 0px 50px;
+    box-shadow: 0px 1px 20px 0px #8a8a8a;
+    margin-bottom: 5px;
+}
+
+.logo {
+    padding-top: 15px;
+}
+
+
+.sentContainer {
+    display: flex;
+    height: calc(50% - 80px);
+    margin: 0;
+    padding: 0px;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+
+.receivedContainer {
+    display: flex;
+    height: 50%;
+    margin: 0;
+    padding: 0px;
+}
+
+.sendEventContainer {
+    width: 100%;
+}
+
+
+.jsoneditor-menu {
+    background-color: #484D6D !important;
+}
+
+#jsoneditor {
+    width: 100%;
+    height: 100%;
+}
+
+.sentEventsContainer {
+    height: 100%;
+}
+
+.sentEvents {
+    list-style-type: none;
+    height: calc(100% - 30px);
+    overflow: scroll;
+    padding: 15px;
+    width: 300px;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    margin-top: 0;
+}
+
+.sentEvents li {
+    cursor: pointer;
+    margin: 5px;
+    border: 1px solid #e3e3e3;
+    margin: 0;
+}
+
+
+.sentEvents li:hover {
+    opacity: 0.7;
+}
+
+.sendEventForm {
+    height: calc(100% - 40px);
+}
+
+.eventName {
+    width: 50%;
+    height: 25px;
+    padding: 5px;
+    font-size: 1.1em;
+    border-radius: 2px;
+    border: 1px solid #e3e3e3;
+}
+.sendEventButton {
+    display: inline-block;
+    padding: 10px 15px;
+    font-size: 15px;
+    border-radius: 2px;
+    -webkit-appearance: none;
+    background-color: #08B2E3;
+    color: #fff;
+    border: none;
+    
+}
+.receivedEventsContainer {
+    height: calc(100% - 40px);
+}
+.receivedEvents {
+    list-style-type: none;
+    height: 100%;
+    overflow: scroll;
+    padding: 15px;
+    width: 300px;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    margin-top: 0;
+}
+
+.receivedView {
+    width: 100%;
+    height: 100%;
+}
+
+#jsonViewContainer {
+    height: 100%;
+}

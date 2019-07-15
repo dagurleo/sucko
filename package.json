@@ -1,6 +1,6 @@
 {
   "name": "sucko",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -16,7 +16,8 @@
     "socket.io-client": "^2.2.0"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/dagurleo/sucko.git"
-  }
+    "type": "git",
+    "url": "https://github.com/dagurleo/sucko.git"
+  },
+  "bin": "./bin/launch.js"
 }

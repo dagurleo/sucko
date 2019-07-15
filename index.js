@@ -1,7 +1,7 @@
 const express = require('express');
 
 
-class Socko {
+class Sucko {
 
     constructor(options) {
         this.socketPort = options.port;
@@ -24,10 +24,8 @@ class Socko {
         }
 
         this.app.get('/', (req, res) => {
-
             res.render('index.html', { apiurl: `http://localhost:${this.socketPort}` });
-
-        })
+        });
 
         this.app.listen(this.port, () => {
             console.log(`Socko server started on port ${port}`);
@@ -40,4 +38,4 @@ class Socko {
 
 
 
-module.exports = Socko;
+module.exports = Sucko;
