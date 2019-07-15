@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Socko</title>
+    <script src="socket.io.js"></script>
+    <script src="jsoneditor.min.js"></script>
+    <link rel="stylesheet" href="jsoneditor.min.css">
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+    <h1>Welcome to socko</h1>
+    <div id="apiurl" style="display: none"><%= apiurl %></div>
+
+    <div class="mainContainer">
+        <div class="sendEventContainer">
+            <form class="sendEvent">
+                <input type="text" class="eventName" id="eventName" value="test_event" />
+                <div id="jsoneditor"></div>
+                <button type="submit">Send</button>
+            </form>
+        </div>
+        <div class="receivedEventsContainer">
+            <div>Incoming events</div>
+            <ul class="receivedEvents"></ul>
+        </div>
+    </div>
+
+
+  </body>
+  <script src="client.js"></script>
+</html>
