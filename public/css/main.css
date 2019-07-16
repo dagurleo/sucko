@@ -4,7 +4,9 @@ body {
     height: 100vh;
 }
 
-
+*:focus {
+    outline: none;
+}
 
 .header {
     height: 50px;
@@ -13,10 +15,12 @@ body {
     padding: 0px 50px;
     box-shadow: 0px 1px 20px 0px #8a8a8a;
     margin-bottom: 5px;
+    display: flex;
 }
 
 .logo {
     padding-top: 15px;
+    width: 100px;
 }
 
 
@@ -54,22 +58,29 @@ body {
     height: 100%;
 }
 
-.sentEvents {
+.sentEvents, .receivedEvents {
     list-style-type: none;
     height: calc(100% - 30px);
     overflow: scroll;
-    padding: 15px;
+    padding: 0;
     width: 300px;
-    border: 1px solid #e3e3e3;
+    /* border: 1px solid #e3e3e3; */
     border-radius: 4px;
     margin-top: 0;
 }
 
-.sentEvents li {
+.sentEvents li, .receivedEvents li {
     cursor: pointer;
     margin: 5px;
     border: 1px solid #e3e3e3;
     margin: 0;
+    color: #666;
+    height: 42px;
+    background: white;
+    line-height: 42px;
+    cursor: pointer;
+    outline: none;
+    padding-left: 5px;
 }
 
 
@@ -89,7 +100,8 @@ body {
     border-radius: 2px;
     border: 1px solid #e3e3e3;
 }
-.sendEventButton {
+.button {
+    cursor: pointer;
     display: inline-block;
     padding: 10px 15px;
     font-size: 15px;
@@ -103,16 +115,6 @@ body {
 .receivedEventsContainer {
     height: calc(100% - 40px);
 }
-.receivedEvents {
-    list-style-type: none;
-    height: 100%;
-    overflow: scroll;
-    padding: 15px;
-    width: 300px;
-    border: 1px solid #e3e3e3;
-    border-radius: 4px;
-    margin-top: 0;
-}
 
 .receivedView {
     width: 100%;
@@ -121,4 +123,51 @@ body {
 
 #jsonViewContainer {
     height: 100%;
+}
+
+.containerTitle {
+    font-size: 21px;
+    text-align: center;
+    /* margin: 15px; */
+}
+
+
+.modal {
+    z-index:101;
+    background-color: #0009;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s, visibility 0s 0.5s;
+    position: absolute;
+    top:0;
+    left:0;
+    height:100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+.modal.active {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s;
+}
+
+.modal-body {
+    width: 25%;
+    height: 300px;
+    margin-top: 250px;
+    background-color: #fff;
+    border-radius: 4px;
+}
+
+.modal-header {
+    height: 40px;
+    background-color: #484D6D;
+}
+
+.modal-header-text {
+    text-align: center;
+    padding-top: 10px;
+    color: #fff;
 }

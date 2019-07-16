@@ -1,30 +1,60 @@
-const socketUrl = document.querySelector('#apiurl').innerHTML;
 const localDb = new LocalDb();
-const socket = io(socketUrl);
-const onevent = socket.onevent;
+const connectionModal = document.querySelector('.modal');
+const openConnModal = document.querySelector('.openConnModal');
+localDb.getSocketUri()
+const getSocketUri = async () => {
+    fetch('/socketurl').then(res => res.json()).then(data => {
+        if (data.socketUri) {
+            initSocket(data.socketUri);
+        } else {
+            const socketUri = localDb.getSocketUri();
+            const socketPayload = localDb.getSocketPayload();
+            if (socketUri) {
+                initSocket(socketUri, socketPayload);
+            } else {
+                connectionModal.classList.add('active')
+            }
+        }
+    })
+}
 
-socket.onevent = function (packet) {
-    var args = packet.data || [];
-    onevent.call(this, packet);    // original call
-    packet.data = ["*"].concat(args);
-    onevent.call(this, packet);      // additional call to catch-all
-};
+getSocketUri();
+let socket;
 
-socket.on("*", function (eventName, data) {
-    const event = {
-        id: Date.now() + eventName,
-        name: eventName,
-        payload: data,
-        date: Date.now()
+const initSocket = (uri, payload) => {
+    if (socket) {
+        socket.disconnect();
     }
-    localDb.addReceivedEvent(event);
-    renderReceivedEvents();
-});
+    if(payload) {
+        socket = io(uri, { query: payload });
+    } else {
+        socket = io(uri);
+    }
+    const onevent = socket.onevent;
+    socket.onevent = function (packet) {
+        var args = packet.data || [];
+        onevent.call(this, packet);    // original call
+        packet.data = ["*"].concat(args);
+        onevent.call(this, packet);      // additional call to catch-all
+    };
+
+    socket.on("*", function (eventName, data) {
+        const event = {
+            id: Date.now() + eventName,
+            name: eventName,
+            payload: data,
+            date: Date.now()
+        }
+        localDb.addReceivedEvent(event);
+        renderReceivedEvents();
+    });
+}
+
 const sendEventForm = document.querySelector('.sendEventForm');
 const jsonEditorContainer = document.getElementById("jsoneditor");
 const jsonViewContainer = document.getElementById("jsonViewContainer");
 const options = {
-    mode: 'code'    
+    mode: 'code'
 };
 const editor = new JSONEditor(jsonEditorContainer, options);
 const editor2 = new JSONEditor(jsonViewContainer, {});
@@ -64,9 +94,9 @@ const renderSentEvents = () => {
         node.innerHTML = `${e.name} - ${e.date}`;
         node.addEventListener('click', e => {
             const { id } = event.target;
-            if(id) {
+            if (id) {
                 const event = localDb.getSentEvent(id);
-                if(event) {
+                if (event) {
                     document.querySelector('.eventName').value = event.name;
                     editor.set(event.payload);
                 }
@@ -87,15 +117,29 @@ const renderReceivedEvents = () => {
         node.innerHTML = `${e.name} - ${e.date}`;
         node.addEventListener('click', e => {
             const { id } = event.target;
-            if(id) {
+            if (id) {
                 const event = localDb.getReceivedEvent(id);
-                if(event) {
+                if (event) {
                     editor2.set(event.payload)
                 }
-            }  
+            }
         })
         receivedEventsList.appendChild(node);
     });
 }
 renderSentEvents();
 renderReceivedEvents();
+
+const connectionForm = document.querySelector('.connectionForm');
+connectionForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const uri = e.target.socketUri.value;
+    const payload = e.target.connectionPayload.value;
+    localDb.changeSocketUri(uri, payload);
+    initSocket(uri, payload);
+    connectionModal.classList.remove('active');
+});
+
+openConnModal.addEventListener('click', () => {
+    connectionModal.classList.add('active');
+})

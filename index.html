@@ -14,16 +14,17 @@
   <body>
     <header class="header">
       <div class="logo">Socko</div>
-      <div id="apiurl" style="display: none"><%= apiurl %></div>
+      <button class="button openConnModal">Connect</button> 
     </header>
     <div class="sentContainer">
         <div class="sentEventsContainer">
+          <div class="containerTitle">Sent events</div>
           <ul class="sentEvents"></ul>
         </div>
         <div class="sendEventContainer">
             <form class="sendEventForm">
                 <input type="text" class="eventName" id="eventName" value="test_event" />
-                <button type="submit" class="sendEventButton">Send</button>
+                <button type="submit" class="button sendEventButton">Send</button>
                 <div id="jsoneditor"></div>
                 
             </form>
@@ -31,6 +32,7 @@
     </div>
     <div class="receivedContainer">
         <div class="receivedEventsContainer">
+            <div class="containerTitle">Received events</div>
             <ul class="receivedEvents"></ul>
         </div>
         <div class="receivedView">
@@ -38,7 +40,26 @@
         </div>
     </div>
 
-
+    <div class="modal ">
+      <div class="modal-body">
+        <div class="modal-header">
+            <div class="modal-header-text">Connect to socket server</div>
+        </div>
+        <div class="modal-content">
+          <form class="connectionForm">
+              <div>
+                  Uri: 
+                  <input type="text" class="socketUri" id="socketUri" />
+              </div>
+              <div>
+                  Connection payload:
+                  <input type="text" class="connectionPayload" id="connectionPayload" />
+              </div>
+              <button type="submit">Connect</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </body>
   <script src="js/localDb.js"></script>
   <script src="js/client.js"></script>

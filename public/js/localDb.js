@@ -2,8 +2,12 @@ class LocalDb {
     constructor() {
         const sentEvents = localStorage.getItem('sentEvents');
         const receivedEvents = localStorage.getItem('receivedEvents');
+        const socketUri = localStorage.getItem('socketUri');
+        const socketPayload = localStorage.getItem('socketPayload');
         this.sentEvents = sentEvents ? JSON.parse(sentEvents) : [];
         this.receivedEvents = receivedEvents ? JSON.parse(receivedEvents) : [];
+        this.socketUri = socketUri ? socketUri : null;
+        this.socketPayload = socketPayload ? socketPayload : "";
     }
 
     saveSentEvents() {
@@ -40,6 +44,21 @@ class LocalDb {
     removeReceivedEvent(eventId) {
         this.receivedEvents = this.receivedEvents.filter(e => e.id !== eventId);
         this.saveReceivedEvents();
+    }
+
+    changeSocketUri(socketUri, payload) {
+        this.socketUri = socketUri;
+        this.socketPayload = payload;
+        localStorage.setItem('socketUri', this.socketUri);
+        localStorage.setItem('socketPayload', this.socketPayload);
+    }
+
+    getSocketUri() {
+        return this.socketUri;
+    }
+
+    getSocketPayload() {
+        return this.socketPayload;
     }
 
 }
